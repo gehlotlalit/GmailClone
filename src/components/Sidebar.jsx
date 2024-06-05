@@ -1,4 +1,3 @@
-import React from 'react'
 import { IoMdStar } from 'react-icons/io'
 import { LuPencil } from 'react-icons/lu'
 import { MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater } from 'react-icons/md'
