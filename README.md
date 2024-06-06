@@ -2,3 +2,4 @@
 ### Create Navbar inside using React Icons & react-avatar
 ### Create Slidebar 
 ### Create Inbox
+### Create Inbox inside Mail & Messages Box 
