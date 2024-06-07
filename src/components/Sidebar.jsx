@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { IoMdStar } from 'react-icons/io'
 import { LuPencil } from 'react-icons/lu'
 import { MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater } from 'react-icons/md'
@@ -31,10 +32,11 @@ const sidebarItems = [
   },
 ]
 const Sidebar = () => {
+  const [open, setOpen] = useState(false);  //this is local state variable
   return (
     <div className='w-[15%] bg'>
       <div className='p-3'>
-        <button className='flex itmes-center gap-2 p-4 rounded-2xl hover:shadow-md bg-[#C2E7FF]'>
+        <button onClick={()=> setOpen(true)} className='flex itmes-center gap-2 p-4 rounded-2xl hover:shadow-md bg-[#C2E7FF]'>
             <LuPencil size={'24px'}/>
             Compose
         </button>
