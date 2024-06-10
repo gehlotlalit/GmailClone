@@ -9,6 +9,7 @@ const appSlice = createSlice({
         setOpen:(state, action) =>{
             state.open = action.payload;
         }
+        
     }
 });
 export const {setOpen} = appSlice.actions;
