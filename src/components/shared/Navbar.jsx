@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiCircleQuestion } from "react-icons/ci";
 import Logo from "./gmailLogo.png"
-import Profile from "./Profile2.png"
 import { IoIosSearch } from 'react-icons/io';
 import { CiSettings } from "react-icons/ci";
 import { PiDotsNineBold } from "react-icons/pi";
 import Avatar from 'react-avatar';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSearchText, setUser } from '../../redux/appSlice';
 import { AnimatePresence, motion } from 'framer-motion';
 import { signOut } from 'firebase/auth';
@@ -15,18 +14,19 @@ import { auth } from '../../firebase';
 const Navbar = () => {
     const [input, setInput] = useState("");
     const [toggle, setToggle] = useState(false);
+    const { user } = useSelector(store => store.app)
     const dispatch = useDispatch();
 
     const signOuthandler = () => {
-        signOut(auth).then(()=>{
+        signOut(auth).then(() => {
             dispatch(setUser(null));
-        }).catch((err) =>{
+        }).catch((err) => {
             console.log(err);
         })
     }
     useEffect(() => {
         dispatch(setSearchText(input))
-    }, [input])
+    }, [dispatch, input])
     return (
         <div className='flex items-center justify-between mx-3 h-16'>
             <div className='flex items-center gap-100'>
@@ -61,7 +61,7 @@ const Navbar = () => {
                         <PiDotsNineBold size={'24px'} />
                     </div>
                     <div className='cursor-pointer'>
-                        <Avatar onClick={() => setToggle(!toggle)} src={Profile} size='40' round={true} />
+                        <Avatar onClick={() => setToggle(!toggle)} src={user?.photoURL} size='40' round={true} />
                         <AnimatePresence>
                             {
                                 toggle && (

@@ -6,6 +6,7 @@
 ### Create SendMail Box
 ### Redux Toolkit install
 ### Firebase setup 
+### Framer Motion use
 ### Login Page
 ### Firebase GoogleAUTH
 ###
