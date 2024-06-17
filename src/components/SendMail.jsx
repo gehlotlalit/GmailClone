@@ -1,40 +1,40 @@
-import React, { useState } from 'react'
-import { RxCross2 } from "react-icons/rx";
+import React, { useState } from 'react';
+import { RxCross2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../redux/appSlice';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
-import {serverTimestamp } from 'firebase/firestore';
+import { serverTimestamp } from 'firebase/firestore';
 
-const SendEmail = () => {
+const SendMail = () => {
     const [formData, setFormData] = useState({
-        to: "",
-        subject: "",
-        message: ""
-    })
-    const { open } = useSelector(store => store.app);
+        to: '',
+        subject: '',
+        message: ''
+    });
+    const open = useSelector(store => store.app.open);
     const dispatch = useDispatch();
 
     const changeEventHandler = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await addDoc(collection(db, "emails"), {
+        await addDoc(collection(db, 'emails'), {
             to: formData.to,
-            subject:formData.subject,
+            subject: formData.subject,
             message: formData.message,
             createdAt: serverTimestamp(),
-        })
-       console.log(formData);
+        });
+        console.log(formData);
         dispatch(setOpen(false));
         setFormData({
-            to: "",
-            subject: "",
-            message: ""
+            to: '',
+            subject: '',
+            message: ''
         });
-    }
+    };
 
     return (
         <div className={`${open ? 'block' : 'hidden'} bg-white max-w-6xl shadow-xl shadow-slate-600 rounded-t-md`}>
@@ -45,13 +45,13 @@ const SendEmail = () => {
                 </div>
             </div>
             <form onSubmit={submitHandler} className='flex flex-col p-3 gap-2'>
-                <input onChange={changeEventHandler} name="recipients" value={formData.recipients} type="text" placeholder='Recipients' className='outline-none py-1' />
-                <input onChange={changeEventHandler} name="subject" value={formData.subject} type="text" placeholder='Subject' className='outline-none py-1' />
-                <textarea onChange={changeEventHandler} name="message" value={formData.message} id="" cols="30" rows="10" className='outline-none py-1'></textarea>
+                <input onChange={changeEventHandler} name='to' value={formData.to} type='text' placeholder='Recipients' className='outline-none py-1' />
+                <input onChange={changeEventHandler} name='subject' value={formData.subject} type='text' placeholder='Subject' className='outline-none py-1' />
+                <textarea onChange={changeEventHandler} name='message' value={formData.message} cols='30' rows='10' className='outline-none py-1'></textarea>
                 <button type='submit' className='bg-[#0B57D0] rounded-full w-fit px-4 py-1 text-white font-medium'>Send</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default SendEmail
+export default SendMail;
