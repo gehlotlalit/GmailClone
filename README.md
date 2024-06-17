@@ -7,3 +7,5 @@
 ### Redux Toolkit install
 ### Firebase setup 
 ### Login Page
+### Firebase GoogleAUTH
+###
